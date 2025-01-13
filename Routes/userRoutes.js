@@ -1,6 +1,6 @@
 const express = require('express');
 const { createUser, getUserByEmail, getUsers, getUserByToken } = require("../Models/userModel");
-const bcrypt = require('bcrypt');
+
 const jwt = require('jsonwebtoken'); // JWT qo'shildi
 const router = express.Router();
 const { protect } = require('../MiddleWares/AuthMiddleware');
@@ -49,7 +49,7 @@ router.post('/login', async (req, res) => {
         }
 
         // Parollarni taqqoslash
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = password === user.password;
         if (!isMatch) {
             return res.status(401).json({ message: 'Parol noto\'g\'ri' });
         }

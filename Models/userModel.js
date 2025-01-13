@@ -1,11 +1,11 @@
 const pool = require('../Config/db');
-const bcrypt = require('bcrypt');
+
 
 
 const createUser = async (name, email, password) => {
     try {
         // Parolni hash qilish
-        const hashedPassword = await bcrypt.hash(password, 10); // 10 - salt round
+        const hashedPassword =password; // 10 - salt round
         const checkByEmail = await pool.query(`SELECT * FROM users WHERE email = $1`,[email]);
 
         if(checkByEmail.rowCount > 0) {
