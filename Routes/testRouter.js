@@ -37,6 +37,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+
 // Test sessiyasi yaratish
 router.post('/add', protect, async (req, res) => {
     const { title, description, authorId, startsAt, endsAt, tests } = req.body;
