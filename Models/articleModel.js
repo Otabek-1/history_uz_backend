@@ -40,8 +40,8 @@ const createArticle = async (title, content, authorId, image) => {
   const slug = slugify(title, { lower: true });
   try {
     const result = await pool.query(
-      'INSERT INTO articles (title, slug, tags, author_id, image) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [title, slug, tags, authorId, image]
+      'INSERT INTO articles (title, content , author_id, image) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [title, content, authorId, image]
     );
     return result.rows[0];
   } catch (error) {
