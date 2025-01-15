@@ -56,12 +56,12 @@ router.get('/slug/:slug', async (req, res) => {
 
 // Yangi maqola yaratish (faqat autentifikatsiya qilingan foydalanuvchilar uchun)
 router.post('/', protect, upload.single('image'), async (req, res) => {
-    const { title, content, category, tags } = req.body;
+    const { title, category } = req.body;
     const userId = req.user.id;
     const image = req.file ? req.file.path : null; // Image path if image is uploaded
 
     try {
-        const newArticle = await createArticle(title, content, category, tags, userId, image);
+        const newArticle = await createArticle(title, content, userId, image);
         return res.status(201).json({ message: 'Maqola yaratildi', article: newArticle });
     } catch (error) {
         return res.status(500).json({ message: error.message });
