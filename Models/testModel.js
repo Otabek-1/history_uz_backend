@@ -6,8 +6,8 @@ const createTestSession = async (title, description, authorId, startsAt, endsAt,
         const testsJson = JSON.stringify(tests);
         const result = await pool.query(
             `INSERT INTO test_sessions (title, description, starts_at, ends_at, tests, results) 
-             VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-            [title, description,startsAt, endsAt, testsJson, '[]'] // Initial empty results array
+             VALUES ($1, $2, $3, $4, $5, $6::jsonb[]) RETURNING *`,
+            [title, description, startsAt, endsAt, testsJson, []] // Bo'sh massiv `[]` shaklida berildi
         );
         return result.rows[0];
     } catch (error) {
@@ -15,6 +15,7 @@ const createTestSession = async (title, description, authorId, startsAt, endsAt,
         throw new Error(error.message);
     }
 };
+
 
 // Barcha test sessiyalarni olish
 const getAllTestSessions = async () => {
