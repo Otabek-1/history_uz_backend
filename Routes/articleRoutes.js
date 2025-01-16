@@ -56,8 +56,8 @@ router.get('/slug/:slug', async (req, res) => {
 
 // Yangi maqola yaratish (faqat autentifikatsiya qilingan foydalanuvchilar uchun)
 router.post('/', protect, upload.single('image'), async (req, res) => {
-    const { title, category } = req.body;
-    const userId = req.user.id;
+    const { title, content, author_id } = req.body;
+    const userId = author_id;
     const image = req.file ? req.file.path : null; // Image path if image is uploaded
 
     try {
