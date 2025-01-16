@@ -36,12 +36,12 @@ const getArticleBySlug = async (id) => {
 };
 
 // Yangi maqola yaratish
-const createArticle = async (title, content, category, tags, authorId, image) => {
+const createArticle = async (title, content, authorId, image) => {
   const slug = slugify(title, { lower: true });
   try {
     const result = await pool.query(
-      'INSERT INTO articles (title, content, category, slug, tags, author_id, image) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
-      [title, content, category, slug, tags, authorId, image]
+      'INSERT INTO articles (title, content, slug, author_id, image) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [title, content, slug, authorId, image]
     );
     return result.rows[0];
   } catch (error) {
@@ -50,12 +50,12 @@ const createArticle = async (title, content, category, tags, authorId, image) =>
 };
 
 // Maqolani yangilash
-const updateArticle = async (id, title, content, category, tags, authorId, image) => {
+const updateArticle = async (id, title, content, image) => {
   const slug = slugify(title, { lower: true });
   try {
     const result = await pool.query(
-      'UPDATE articles SET title = $1, content = $2, category = $3, slug = $4, tags = $5, image = $6 WHERE id = $7 AND author_id = $8 RETURNING *',
-      [title, content, category, slug, tags, image, id, authorId]
+      'UPDATE articles SET title = $1, content = $2,  slug = $3,image = $4 WHERE id = $5 RETURNING *',
+      [title, content, slug, image, id]
     );
     return result.rows[0];
   } catch (error) {
@@ -78,28 +78,50 @@ const updateViews = async (id) => {
 
 // Likesni yangilash
 const updateLikes = async (id, userId) => {
-    try {
-        const likes = await pool.query(`SELECT * FROM articles WHERE id = $1`,[id]);
-        const arr = likes.rows[0].likes;
-        
-        if(arr.includes(userId)){
-            return null;
-        }
-        arr.push(userId);
-        const result = await pool.query(`UPDATE articles SET likes = $1 WHERE id = $2`,[arr, id]);
-        return result.rows[0];        
-    } catch (error) {
-        return error;
-    }
-  };
-  
+  try {
+    const likes = await pool.query(`SELECT * FROM articles WHERE id = $1`, [id]);
+    const arr = likes.rows[0].likes;
 
-module.exports = { 
-  getArticles, 
-  getArticleBySlug, 
-  createArticle, 
-  updateArticle, 
-  updateViews, 
-  updateLikes, 
-  upload 
+    if (arr.includes(userId)) {
+      return null;
+    }
+    arr.push(userId);
+    const result = await pool.query(`UPDATE articles SET likes = $1 WHERE id = $2`, [arr, id]);
+    return result.rows[0];
+  } catch (error) {
+    return error;
+  }
+};
+
+const getArticleById = async (id) => {
+  try {
+    const result = await pool.query(`SELECT * FROM articles WHERE id = $1`, [id]);
+    return result.rows[0];
+  } catch (error) {
+    return error;
+    console.log(error);
+  }
+}
+
+const deleteArticle = async (id) => {
+  try {
+    const result = await pool.query(`DELETE * FROM articles WHERE id = $1`, [id]);
+    return result;
+  } catch (error) {
+    console.error('Xatolik:', error);  // console.log o'rniga console.error ishlatiladi.
+    return error;  // Buni faqat qaytarishingiz kerak bo'lsa qoldiring.
+  }
+};
+
+
+module.exports = {
+  getArticles,
+  getArticleBySlug,
+  createArticle,
+  updateArticle,
+  updateViews,
+  updateLikes,
+  upload,
+  deleteArticle,
+  getArticleById
 };

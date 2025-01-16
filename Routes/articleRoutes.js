@@ -56,12 +56,12 @@ router.get('/slug/:slug', async (req, res) => {
 
 // Yangi maqola yaratish (faqat autentifikatsiya qilingan foydalanuvchilar uchun)
 router.post('/', protect, upload.single('image'), async (req, res) => {
-    const { title, content, category, tags } = req.body;
-    const userId = req.user.id;
+    const { title, content, user_id } = req.body;
+    const userId = user_id;
     const image = req.file ? req.file.path : null; // Image path if image is uploaded
 
     try {
-        const newArticle = await createArticle(title, content, category, tags, userId, image);
+        const newArticle = await createArticle(title, content, userId, image);
         return res.status(201).json({ message: 'Maqola yaratildi', article: newArticle });
     } catch (error) {
         return res.status(500).json({ message: error.message });
@@ -71,12 +71,12 @@ router.post('/', protect, upload.single('image'), async (req, res) => {
 // Maqolani yangilash (faqat autentifikatsiya qilingan foydalanuvchilar uchun)
 router.put('/:id', protect, upload.single('image'), async (req, res) => {
     const { id } = req.params;
-    const { title, content, category, tags } = req.body;
-    const userId = req.user.id;
+    const { title, content } = req.body;
+
     const image = req.file ? req.file.path : null; // Image path if image is uploaded
 
     try {
-        const updatedArticle = await updateArticle(id, title, content, category, tags, userId, image);
+        const updatedArticle = await updateArticle(id, title, content, image);
         if (!updatedArticle) {
             return res.status(404).json({ message: 'Maqola topilmadi yoki yangilashda xato' });
         }
@@ -89,10 +89,10 @@ router.put('/:id', protect, upload.single('image'), async (req, res) => {
 // Maqolani o'chirish (faqat autentifikatsiya qilingan foydalanuvchilar uchun)
 router.delete('/:id', protect, async (req, res) => {
     const { id } = req.params;
-    const userId = req.user.id;
+
 
     try {
-        const deletedArticle = await deleteArticle(id, userId);
+        const deletedArticle = await deleteArticle(id);
         if (!deletedArticle) {
             return res.status(404).json({ message: 'Maqola topilmadi yoki o\'chirishda xato' });
         }

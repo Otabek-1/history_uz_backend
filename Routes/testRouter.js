@@ -36,7 +36,7 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({ message: "Sessiyani olishda xatolik", error: error.message });
     }
 });
-
+ 
 
 // Test sessiyasi yaratish
 router.post('/add', protect, async (req, res) => {
