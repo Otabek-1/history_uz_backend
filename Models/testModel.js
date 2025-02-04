@@ -16,7 +16,6 @@ const createTestSession = async (title, description, authorId, startsAt, endsAt,
               JSON.stringify(participants), 
               startsAt, 
               endsAt, 
-              duration, 
               testsCount, 
               JSON.stringify(tests), 
               JSON.stringify(results)
