@@ -4,15 +4,14 @@ const pool = require('../Config/db');
 const createTestSession = async (title, description, authorId, startsAt, endsAt, tests) => {
     try {
         const result = await pool.query(
-            `INSERT INTO test_sessions (title, description, participants, starts_at, ends_at, tests)
-             VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+            `INSERT INTO test_sessions (title, description, starts_at, ends_at, tests)
+             VALUES ($1, $2, $3, $4, $5) RETURNING *`,
             [
               title, 
-              description, 
-              "[]",
+              description,
               startsAt, 
               endsAt, 
-              tests, 
+              JSON.stringify(tests), 
             ]
           );
                        
