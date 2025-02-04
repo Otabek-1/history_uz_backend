@@ -7,7 +7,7 @@ const createTestSession = async (title, description, authorId, startsAt, endsAt,
         const result = await pool.query(
             `INSERT INTO test_sessions (title, description, author_id, starts_at, ends_at, tests, results) 
              VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-            [title, description, authorId, startsAt, endsAt, testsJson, JSON.stringify([])] // ✅ JSON to‘g‘ri formatda
+            [title, description, authorId, startsAt, endsAt, testsJson, '[]'::text] // ✅ JSON to‘g‘ri formatda
         );               
         return result.rows[0];
     } catch (error) {
