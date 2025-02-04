@@ -5,10 +5,24 @@ const createTestSession = async (title, description, authorId, startsAt, endsAt,
     try {
         const testsJson = JSON.stringify(tests);
         const result = await pool.query(
-            `INSERT INTO test_sessions (title, description, author_id, starts_at, ends_at, tests, results) 
-             VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-            [title, description, authorId, startsAt, endsAt, testsJson, '[]'::text] // ✅ JSON to‘g‘ri formatda
-        );               
+            `INSERT INTO test_sessions (title, description, author_id, participants, starts_at, ends_at, duration, tests_count, tests, created_at, updated_at, results)
+             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *`,
+            [
+              title, 
+              description, 
+              authorId || null, 
+              JSON.stringify(participants), 
+              startsAt, 
+              endsAt, 
+              duration, 
+              testsCount, 
+              JSON.stringify(tests), 
+              createdAt, 
+              updatedAt, 
+              JSON.stringify(results)
+            ]
+          );
+                       
         return result.rows[0];
     } catch (error) {
         console.error("Error in createTestSession: ", error);
