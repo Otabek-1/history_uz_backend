@@ -1,166 +1,184 @@
-const grade5Tests = [
-    {
-        id: 1,
-        question: "O`zbekiston Respublikasi tarkibida nechta respublika va viloyat bor?",
-        options: ["12 ta viloyat", "5 ta respublika 15 ta viloyat", "1 ta respublika 12 t viloyat", "2 ta respublika 11 ta viloyat"],
-        correct: 2
-    },
-    {
-        id: 2,
-        question: "O`zbekistonda qancha millat va elat yashagan?",
-        options: ["100 dan ortiq", "50 ga yaqin", "60 dan ortiq", "130 ga yaqin"],
-        correct: 3
-    },
-    {
-        id: 3,
-        question: "’’Tarix’’ so`zi qaysi tildan olingan va u qanday ma’noni anglatadi?",
-        options: ["arabcha ‘’o`tgan voqealar haqida hikoya", "yunoncha ‘’o`tmish haqida hikoyalar", "lotincha ‘’ajdodlarning uzoq va yaqin o`tmishi", "arabcha ‘’o`zlikni anglash manaviy barkamollik"],
-        correct: 0
-    },
-    {
-        id: 4,
-        question: "Hozir dunyoda qanday yil hisoblari qo`llanilmoqda?",
-        options: ["hijriy, shamtiy", "milodiy,qamariy", "shamtiy, qamariy", "hijriy, milodiy"],
-        correct: 3
-    },
-    {
-        id: 5,
-        question: "Hozirgi kunda qo`llanayotgan kalendar qaysi?",
-        options: ["Grigoriy", "Yuliy", "Misr", "Xorazm"],
-        correct: 0
-    },
-    {
-        id: 6,
-        question: "Eng qadimgi odamlar yer yuzida qachondan yashay boshlaganlar?",
-        options: ["bundan 3-4 mln yil oldin", "bundan 2-3mln yil oldin", "bundan 500-700 ming yil oldin", "bundan 12-40 ming yil oldin"],
-        correct: 1
-    },
-    {
-        id: 7,
-        question: "Eng qadimgi odamlar qayerlarda yashaganlar?",
-        options: ["qal’alarda ,g`orlard ,chaylalarda", "yerto`lalarda ,o`rmonlarda hujralarda", "daraxt kovaklarida, g`orlarda poxsa uylarda", "g`or, ungir o`rmon chakalakzorlarda"],
-        correct: 3
-    },
-    {
-        id: 8,
-        question: "Inson qo’lga o’rgatgan birinchi hayvon qaysi?",
-        options: ["ot", "it", "sigir", "echki"],
-        correct: 1
-    },
-    {
-        id: 9,
-        question: "O’zbekiston tarixiga oid ilk manbaalarni aniqlang?",
-        options: ["Behustun bitiklari", "Avesto kitobi", "Gerodotning ,,tarix’’ asari", "barcha javoblar to’g’ri"],
-        correct: 1
-    },
-    {
-        id: 10,
-        question: "Dunyoda dastlabki davlatlar qayerda tashkil topgan?",
-        options: ["Misrda", "Mesopotamiyada", "Hindistonda", "Xitoyda"],
-        correct: 1
-    },
-    {
-        id: 11,
-        question: "Qaysi xalqda aholi 4 kastaga bo’lingan?",
-        options: ["Misrliklarda", "Mesopotamiyada", "Hindlarda", "Xitoylarda"],
-        correct: 2
-    },
-    {
-        id: 12,
-        question: "Xalqaro sport musoboqasi -Olimpiada qayerda paydo bo’lgan?",
-        options: ["Hindistonda", "Misrda", "Mesopotamiyada", "Yunonistonda"],
-        correct: 3
-    },
-    {
-        id: 13,
-        question: "Lotin yozuvining vatani qayer?",
-        options: ["Rim", "Yunoniston", "Mesopotamiya", "Misr"],
-        correct: 0
-    },
-    {
-        id: 14,
-        question: "Misr nimasi bilan mashhur?",
-        options: ["ehromlari bilan", "kalendar yaratgani bilan", "ilk davlat tuzilgani bilan", "barchasi"],
-        correct: 1
-    },
-    {
-        id: 15,
-        question: "Nomi “yorug’ osmon” ma’nosini bildiradi, uning sharafiga sport musobaqalari o’tkaziladi. U …?",
-        options: ["Ossuriya malikasi Semiramida", "Olimp xudosi Zevs", "Ma’buda Artemida", "Quyosh xudosi Gelios"],
-        correct: 1
-    },
-    {
-        id: 16,
-        question: "O’zbekiston hududida davlatlar qachon vujudga kelgan?",
-        options: ["m.a.IV mingyillikda", "m.a.VII asrda", "m.a.II mingyillikda", "m.a.V asrda"],
-        correct: 1
-    },
-    {
-        id: 17,
-        question: "O’zbekiston hududidagi ilk davlatlarni belgilang.",
-        options: ["Xorazm", "Baqtriya", "Sug’diyona", "barchasi"],
-        correct: 3
-    },
-    {
-        id: 18,
-        question: "M.a. 530-yilda massagetlar malikasi qaysi bosqinchini yengdi?",
-        options: ["Kir II", "Doro I", "Sparganis", "To’maris"],
-        correct: 0
-    },
-    {
-        id: 19,
-        question: "Doro I ni yenggan Shiroq qaysi qabiladan edi?",
-        options: ["massaget", "sug’d", "fors", "sak"],
-        correct: 3
-    },
-    {
-        id: 20,
-        question: "Turon podshosining nomini toping.",
-        options: ["Siyovush", "Afrosiyob", "Kaykovus", "Kayxusrav"],
-        correct: 1
-    },
-    {
-        id: 21,
-        question: "’’Tabiiy tarix asari necha kitobdan iborat?",
-        options: ["30", "37", "9"],
-        correct: 1
-    },
-    {
-        id: 22,
-        question: "’’Toshli yer” bu?",
-        options: ["Yunoniston", "Rim", "Xitoy"],
-        correct: 1
-    },
-    {
-        id: 23,
-        question: "’’Respublika” so’zining ma’nosi?",
-        options: ["Umumxalq ishi", "Umumiy ish", "Saylov"],
-        correct: 0
-    },
-    {
-        id: 24,
-        question: "Xeops piramidasi necha metr bo’lgan?",
-        options: ["146,5", "147", "150"],
-        correct: 0
-    },
-    {
-        id: 25,
-        question: "’’Semiramida osma bog’lari” necha qavat bo’lgan?",
-        options: ["2", "3", "4"],
-        correct: 2
-    },
-    {
-        id: 26,
-        question: "Sfinks haykali necha metr bo’lg?an?",
-        options: ["10", "20", "30"],
-        correct: 1
-    },
-    {
-        id: 27,
-        question: "Semiramida osma bog’lari kim tomonidan qurdirilgan?",
-        options: ["Navuxodonosor", "Semiramida", "Fidiy"],
-        correct: 0
-    }
-]
+const getTests = [
+  {
+    id: 1,
+    questionText: "Vatan so'zi qanday ma'noni anglatadi?",
+    options: ["Ona yurt", "Aziz tuproq", "Muqaddas joy", "Ota yurt"],
+    correct: 0
+  },
+  {
+    id: 2,
+    questionText: "Vatan so'zining kelib chiqish tili qaysi?",
+    options: ["Fors", "Arab", "Lotin", "Rus"],
+    correct: 1
+  },
+  {
+    id: 3,
+    questionText: "Tarix fani nimani o'rganadi?",
+    options: ["Geografik hududlarni", "O'tmish voqealarini", "Yangi texnologiyalarni", "Falsafa asoslarini"],
+    correct: 1
+  },
+  {
+    id: 4,
+    questionText: "Tarix so'zi qaysi tilga oid?",
+    options: ["Yunon", "Lotin", "Arab", "Fors"],
+    correct: 2
+  },
+  {
+    id: 5,
+    questionText: "Kalendar so'zining ma'nosi nima?",
+    options: ["Kunlar hisobi", "Yil boshi", "Har oyning birinchi kuni", "Vaqtni o'lchash"],
+    correct: 2
+  },
+  {
+    id: 6,
+    questionText: "Dastlabki kalendar qayerda yaratilgan?",
+    options: ["Rim", "Misr", "Gretsiya", "Bobil"],
+    correct: 1
+  },
+  {
+    id: 7,
+    questionText: "Xronologiya so'zi qanday ma'noni anglatadi?",
+    options: ["Voqealar vaqt tartibi", "Sanalar ro'yxati", "Ilmiy kitob", "Tarixiy joylar"],
+    correct: 0
+  },
+  {
+    id: 8,
+    questionText: "Xronos so'zi qaysi ma'noni bildiradi?",
+    options: ["Vaqt", "Fan", "Voqea", "Shaxs"],
+    correct: 0
+  },
+  {
+    id: 9,
+    questionText: "Milod tushunchasining ma'nosi nima?",
+    options: ["Yil hisobi", "Tug'ilish", "Asrning boshi", "Voqea"],
+    correct: 1
+  },
+  {
+    id: 10,
+    questionText: "Hijriy yil hisobi qayerda yaratilgan?",
+    options: ["Arabiston", "Misr", "Hindiston", "Xitoy"],
+    correct: 0
+  },
+  {
+    id: 11,
+    questionText: "Arxeologiya fani nimani o'rganadi?",
+    options: ["Qadimgi yozuvlarni", "Moddiy manbalarni", "Til tarixini", "Shaharlarni"],
+    correct: 1
+  },
+  {
+    id: 12,
+    questionText: "Arxeologiya so'zi qaysi tildan olingan?",
+    options: ["Lotin", "Yunon", "Arab", "Fors"],
+    correct: 0
+  },
+  {
+    id: 13,
+    questionText: "Xarita nima?",
+    options: ["Yozuv turi", "Tosh surat", "Yer yuzasining tasviri", "Tarixiy asar"],
+    correct: 2
+  },
+  {
+    id: 14,
+    questionText: "Globusning ma'nosi nima?",
+    options: ["Yer olmasi", "To'p", "Shar", "Dumaloq"],
+    correct: 2
+  },
+  {
+    id: 15,
+    questionText: "Qaysi odam turi olovdan foydalangan?",
+    options: ["Zinjantrop", "Sinantrop", "Kromanyon", "Neandertal"],
+    correct: 1
+  },
+  {
+    id: 16,
+    questionText: "Neandertal odam qayerdan topilgan?",
+    options: ["Fransiya", "Xitoy", "Germaniya", "Misr"],
+    correct: 2
+  },
+  {
+    id: 17,
+    questionText: "Qoyatosh suratlari nimani bildiradi?",
+    options: ["San'atning ilk namunasi", "Yozuvning boshlanishi", "Ov qurollari", "Geografik joy"],
+    correct: 0
+  },
+  {
+    id: 18,
+    questionText: "Altamira g'ori qayerda joylashgan?",
+    options: ["Fransiya", "Ispaniya", "Gretsiya", "Boshqirdiston"],
+    correct: 1
+  },
+  {
+    id: 19,
+    questionText: "Yozuv qanday vosita?",
+    options: ["Aloqa tizimi", "Geografik xarita", "Toshdagi surat", "San'at"],
+    correct: 0
+  },
+  {
+    id: 20,
+    questionText: "Birinchi alifbo qayerda yaratilgan?",
+    options: ["Finikiya", "Misr", "Xitoy", "Shumer"],
+    correct: 0
+  },
+  {
+    id: 21,
+    questionText: "Avesto kitobi qayerda yaratilgan?",
+    options: ["Baqtriya", "Sug'd", "Xorazm", "Bobil"],
+    correct: 2
+  },
+  {
+    id: 22,
+    questionText: "Avesto qanday ma'noni anglatadi?",
+    options: ["Muqaddas qonun", "Yozma manba", "Ezgu niyat", "Buyuk podshoh"],
+    correct: 0
+  },
+  {
+    id: 23,
+    questionText: "O'rta asrlarda O'rta Osiyoda eng mashhur madrasalar qaysi shaharlarda joylashgan edi?",
+    options: ["Buxoro va Samarqand", "Xiva va Qo'qon", "Termiz va Shahrisabz", "Farg'ona va Toshkent"],
+    correct: 0
+  },
+  {
+    id: 24,
+    questionText: "Amir Temurning shaxsiy kutubxonasi qaysi shaharda joylashgan edi?",
+    options: ["Samarqand", "Buxoro", "Shahrisabz", "Xiva"],
+    correct: 0
+  },
+  {
+    id: 25,
+    questionText: "Islom Karimov qaysi yili Oʻzbekiston Respublikasining birinchi Prezidenti etib saylangan?",
+    options: ["1990", "1991", "1992", "1993"],
+    correct: 1
+  },
+  {
+    id: 26,
+    questionText: "Temuriylar sulolasining asoschisi kim?",
+    options: ["Ulug'bek", "Bobur", "Amir Temur", "Shayboniyxon"],
+    correct: 2
+  },
+  {
+    id: 27,
+    questionText: "Xorazmiy qaysi sohada mashhur bo'lgan?",
+    options: ["Astronomiya", "Geografiya", "Matematika", "Tibbiyot"],
+    correct: 2
+  },
+  {
+    id: 28,
+    questionText: "Buyuk ipak yo‘li qanday ahamiyatga ega bo‘lgan?",
+    options: ["Faqat savdo uchun", "Madaniy almashinuv uchun", "Harbiy yurishlar uchun", "Faqatgina Xitoy bilan aloqalar uchun"],
+    correct: 1
+  },
+  {
+    id: 29,
+    questionText: "O‘zbekiston Respublikasining Davlat madhiyasi qachon qabul qilingan?",
+    options: ["1990", "1991", "1992", "1993"],
+    correct: 2
+  },
+  {
+    id: 30,
+    questionText: "Jaloliddin Manguberdi qaysi davlat bosqiniga qarshi kurashgan?",
+    options: ["Vizantiya", "Mo'g'ullar", "Xitoy", "Rossiya"],
+    correct: 1
+  }
+];
 
-module.exports = { grade5Tests };
+module.exports = { getTests };

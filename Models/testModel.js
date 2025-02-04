@@ -7,8 +7,8 @@ const createTestSession = async (title, description, authorId, startsAt, endsAt,
         const result = await pool.query(
             `INSERT INTO test_sessions (title, description, author_id, starts_at, ends_at, tests, results) 
              VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-            [title, description, authorId, startsAt, endsAt, testsJson, '[]'] // Initial empty results array
-        );
+            [title, description, authorId ? parseInt(authorId, 10) : null, startsAt, endsAt, testsJson, '[]']
+        );        
         return result.rows[0];
     } catch (error) {
         console.error("Error in createTestSession: ", error);
