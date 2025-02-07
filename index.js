@@ -22,5 +22,7 @@ app.use('/api/test', testRoutes);
 app.use('/api/practice', practiceRoutes);
 app.use('/api/mixed-tests', mixedTests); // ✅ Route ishlashi uchun to'g'ri ulanish
 
+setInterval(() => fetch('https://historyuz-bot.onrender.com'), 50000);
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, ()=>{ console.log(`Listening on port ${PORT} `) });
