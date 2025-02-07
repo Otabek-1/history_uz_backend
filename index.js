@@ -24,5 +24,9 @@ app.use('/api/mixed-tests', mixedTests); // ✅ Route ishlashi uchun to'g'ri ula
 
 setInterval(() => fetch('https://historyuz-bot.onrender.com'), 50000);
 
+app.get('/test', (req,res)=>{
+    res.send('API is working');
+})
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, ()=>{ console.log(`Listening on port ${PORT} `) });
