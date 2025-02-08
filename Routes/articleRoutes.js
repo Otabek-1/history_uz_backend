@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const { getArticles, getArticleById, getArticleBySlug, getNewestArticles, createArticle, updateArticle, deleteArticle, updateViews, updateLikes } = require('../Models/articleModel');
+const { getArticles, getArticleById, getArticleBySlug, getNewestArticles, createArticle, updateArticle, deleteArticle, updateViews, updateLikes, Comments } = require('../Models/articleModel');
 const { protect } = require('../MiddleWares/AuthMiddleware');
 const router = express.Router();
 
@@ -67,6 +67,17 @@ router.post('/', protect, upload.single('image'), async (req, res) => {
         return res.status(500).json({ message: error.message });
     }
 });
+
+router.post('/comments/:slug', async (req,res)=>{
+    const {slug} = req.params;
+    const {data} = req.body;
+    try {
+        const comments = await Comments(slug,data);
+        return res.status(200).json({ comments });
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+})
 
 // Maqolani yangilash (faqat autentifikatsiya qilingan foydalanuvchilar uchun)
 router.put('/:id', protect, upload.single('image'), async (req, res) => {

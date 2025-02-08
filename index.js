@@ -22,6 +22,8 @@ app.use('/api/test', testRoutes);
 app.use('/api/practice', practiceRoutes);
 app.use('/api/mixed-tests', mixedTests); // ✅ Route ishlashi uchun to'g'ri ulanish
 
+
+
 setInterval(() => fetch('https://historyuz-bot.onrender.com'), 30000);
 
 app.get('/test', (req,res)=>{
