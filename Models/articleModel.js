@@ -64,9 +64,9 @@ const createArticle = async (title, content, authorId, image) => {
   const slug = slugify(title, { lower: true });
   try {
     const result = await pool.query(
-      `INSERT INTO articles (title, content, slug, author_id, image, comments) 
-       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-      [title, content, slug, authorId, image, JSON.stringify([])] // JSONB uchun to‘g‘ri format
+      `INSERT INTO articles (title, content, slug, author_id, image) 
+       VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+      [title, content, slug, authorId, image] // JSONB uchun to‘g‘ri format
     );
     return result.rows[0];
   } catch (error) {
