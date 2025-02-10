@@ -140,5 +140,5 @@ app.get('/test', (req, res) => {
 });
 
 // Serverni ishga tushirish
-const PORT = 4000;
+const PORT = 7000;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
