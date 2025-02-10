@@ -1,6 +1,6 @@
 const express = require('express');
 const { createUser, getUserByEmail, getUsers, getUserByToken } = require("../Models/userModel");
-
+require('dotenv').config();
 const jwt = require('jsonwebtoken'); // JWT qo'shildi
 const router = express.Router();
 const { protect } = require('../MiddleWares/AuthMiddleware');
