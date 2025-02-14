@@ -162,44 +162,11 @@ app.put('/daily-participate', async (req, res) => {
     }
 });
 
-app.put('/add-ticket',async(req,res)=>{
-    const { id, tgid } = req.body;
-    const user = await pool.query(`SELECT * FROM users WHERE id = $1`, [id]);
-    const inviteds= user.invited;
-    if(user.rows.length === 0 ){
-        if(inviteds.includes(tgid)){
-            return res.status(400).json({ success: false, message: 'Foydalanuvchi mavjud!' });
-        }
-        return res.status(404).json({ success: false, message: 'Foydalanuvchi topilmadi' });
-    }
-    const result = await pool.query(`UPDATE users SET ticket = ticket + 1 WHERE id = $1 RETURNING ticket`, [id]);
-    if(result.rowCount > 0){
-        await pool.query(`UPDATE users SET invited = $1 WHERE id = $2`, [inviteds.push(tgid), tgid]);
-        return res.status(200).json({ success: true, message: 'Sizning ticketingiz yangilandi', ticket: result.rows[0].ticket });
-    }
-})
-
 
 app.get('/daily-compet-question', (req, res) => {
     const question = dailyCompetition[Math.floor(Math.random() * dailyCompetition.length)];
     return res.status(200).json(question);
 })
-
-app.post('/daily-result', async (req,res)=>{
-    const {uid,name, result} = req.body;
-    try {
-        const user = await pool.query(`SELECT * FROM daily_results WHERE user_id = ${uid}`);
-        if(user.rowCount > 0){
-            await pool.query(`UPDATE daily_results SET result = $1 WHERE user_id = $2`, [result, uid]);
-        } else {
-            await pool.query(`INSERT INTO daily_results (user_id, name, result) VALUES ($1, $2, $3)`, [uid, name, result]);
-        }
-        return res.status(200).json({success: true, message: "Natija muvaffaqiyatli saqlandi"});
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
-    }    
-})
-
 
 
 
