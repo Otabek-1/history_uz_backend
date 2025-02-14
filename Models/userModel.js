@@ -77,16 +77,9 @@ const getUsers = async () => {
     }
 };
 
-const getUserById = async(id) =>{
-    try {
-        const result = await pool.query(`SELECT * FROM users WHERE id = $1`,[id]);
-        return result.rows[0]; // Birinchi natijani qaytaradi
-    } catch (error) {
-        return error;
-    }
-}
 
 
 
 
-module.exports = { createUser, getUserByEmail, getUsers, getUserByToken, getUserById };
+
+module.exports = { createUser, getUserByEmail, getUsers, getUserByToken };
